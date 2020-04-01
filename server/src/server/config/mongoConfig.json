@@ -1,0 +1,10 @@
+{
+  "development": {
+    "database": "shm-chat",
+    "host": "localhost"
+  },
+  "production": {
+    "database": "shm-chat",
+    "host": "localhost"
+  }
+}
