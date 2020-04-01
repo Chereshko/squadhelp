@@ -16,10 +16,10 @@ import Schems from '../../validators/validationSchems';
 class RegistrationForm extends React.Component{
 
   componentWillUnmount () {
-    this.props.authClear();
+    this.props.clearForm();
   }
 
-  clicked = (values) => {
+  handleData = (values) => {
     this.props.register({
       firstName: values.firstName,
       lastName: values.lastName,
@@ -31,7 +31,7 @@ class RegistrationForm extends React.Component{
   };
 
   render () {
-    const {handleSubmit, submitting, auth, authClear} = this.props;
+    const {handleSubmit, submitting, auth, clearForm} = this.props;
     const {error} = auth;
     const formInputClasses = {
       container: styles.inputContainer,
@@ -43,9 +43,9 @@ class RegistrationForm extends React.Component{
     return (
       <div className={ styles.signUpFormContainer }>
         { error && <Error data={ error.data } status={ error.status }
-                          clearError={ authClear }/> }
+                          clearError={ clearForm }/> }
 
-        <form onSubmit={ handleSubmit(this.clicked) }>
+        <form onSubmit={ handleSubmit(this.handleData) }>
           <div className={ styles.row }>
             <Field
               name='firstName'
@@ -139,7 +139,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => (
   {
     register: (data) => dispatch(authActionRegister(data)),
-    authClear: () => dispatch(clearAuth()),
+    clearForm: () => dispatch(clearAuth()),
   }
 );
 
