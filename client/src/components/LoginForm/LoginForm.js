@@ -20,83 +20,52 @@ class LoginForm extends React.Component{
   };
 
   render () {
-    const { error, isFetching } = this.props.auth;
-    const { handleSubmit, submitting, authClear } = this.props;
+    const {error, isFetching} = this.props.auth;
+    const {handleSubmit, submitting, authClear} = this.props;
+
+    const formInputClasses = {
+      container: styles.inputContainer,
+      input: styles.input,
+      warning: styles.fieldWarning,
+      notValid: styles.notValid,
+      valid: styles.valid,
+    };
+
     return (
-      < div;
-    className = { styles.loginForm } >
-      { error && < Error;
-    data = { error.data };
-    status = { error.status };
-    clearError = { authClear };
-    />}
-    < h2 > LOGIN;
-    TO;
-    YOUR;
-    ACCOUNT < /h2>
-    < form;
-    onSubmit = { handleSubmit (this.clicked
-  )
-  }>
-  <
-    Field;
-    name = 'email';
-    classes = {
-    {
-      container: styles.inputContainer,
-        input;
-    :
-      styles.input,
-        warning;
-    :
-      styles.fieldWarning,
-        notValid;
-    :
-      styles.notValid;
-    }
-  }
-    component = { FormInput };
-    type = 'text';
-    label = 'Email Address'
-      / >
-      < Field;
-    name = 'password';
-    classes = {
-    {
-      container: styles.inputContainer,
-        input;
-    :
-      styles.input,
-        warning;
-    :
-      styles.fieldWarning,
-        notValid;
-    :
-      styles.notValid;
-    }
-  }
-    component = { FormInput };
-    type = 'password';
-    label = 'password'
-      / >
-      < button;
-    type = 'submit';
-    disabled = { submitting };
-    className = { styles.submitContainer } >
-      < span;
-    className = { styles.inscription } >
-      { isFetching ? 'Submitting...' : 'LOGIN' } < /span>
-      < /button>
-      < /form>
-      < /div>;
-  )
-    ;
+      <div className={ styles.loginForm }>
+        { error && <Error data={ error.data } status={ error.status }
+                          clearError={ authClear }/> }
+        <h2>LOGIN TO YOUR ACCOUNT</h2>
+        <form onSubmit={ handleSubmit(this.clicked) }>
+          <Field
+            name='email'
+            classes={ formInputClasses }
+            component={ FormInput }
+            type='text'
+            label='Email Address'
+          />
+          <Field
+            name='password'
+            classes={ formInputClasses }
+            component={ FormInput }
+            type='password'
+            label='password'
+          />
+          <button type='submit' disabled={ submitting }
+                  className={ styles.submitContainer }>
+            <span className={ styles.inscription }>{ isFetching
+              ? 'Submitting...'
+              : 'LOGIN' }</span>
+          </button>
+        </form>
+      </div>
+    );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { auth } = state;
-  return { auth };
+  const {auth} = state;
+  return {auth};
 };
 
 const mapDispatchToProps = (dispatch) => (
@@ -110,3 +79,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: 'login',
   validate: customValidator(Schems.LoginSchem),
 })(LoginForm));
+
