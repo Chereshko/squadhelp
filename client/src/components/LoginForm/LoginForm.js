@@ -8,6 +8,7 @@ import FormInput from '../FormInput/FormInput';
 import customValidator from '../../validators/validator';
 import Schems from '../../validators/validationSchems';
 import Error from '../../components/Error/Error';
+import PropTypes from 'prop-types';
 
 class LoginForm extends React.Component{
 
@@ -25,10 +26,10 @@ class LoginForm extends React.Component{
 
     const formInputClasses = {
       container: styles.inputContainer,
-      input: styles.input,
+      className: styles.input,
       warning: styles.fieldWarning,
-      notValid: styles.notValid,
-      valid: styles.valid,
+      invalidStyle: styles.notValid,
+      validStyle: styles.valid,
     };
 
     return (
@@ -39,14 +40,14 @@ class LoginForm extends React.Component{
         <form onSubmit={ handleSubmit(this.clicked) }>
           <Field
             name='email'
-            classes={ formInputClasses }
+            { ...formInputClasses }
             component={ FormInput }
             type='text'
             label='Email Address'
           />
           <Field
             name='password'
-            classes={ formInputClasses }
+            { ...formInputClasses }
             component={ FormInput }
             type='password'
             label='password'
